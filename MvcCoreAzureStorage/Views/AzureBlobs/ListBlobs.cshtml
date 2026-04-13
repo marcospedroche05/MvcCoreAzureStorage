@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MvcCoreAzureStorage.Models.BlobModel>
+
+@{
+    ViewData["Title"] = "ListBlobs";
+}
+
+<h1>ListBlobs</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Container)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Container)
+            </td>
+            <td>
+                <a asp-controller="AzureBlobs" asp-action="DeleteBlob" asp-route-containername="@item.Container"
+                asp-route-blobname="@item.Nombre" class="btn btn-danger">Delete blob</a>
+            </td>
+            <td>
+                <img src="~/images/@item.Nombre" style="width: 100px; height:100px"/>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

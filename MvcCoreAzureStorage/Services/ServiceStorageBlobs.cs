@@ -25,7 +25,7 @@ namespace MvcCoreAzureStorage.Services
 
         public async Task CreateContainerAsync(string containerName)
         {
-            await this.client.CreateBlobContainerAsync(containerName.ToLower(), PublicAccessType.Blob);
+            await this.client.CreateBlobContainerAsync(containerName.ToLower(), PublicAccessType.None);
         }
 
         //ELIMINAR UN CONTAINER

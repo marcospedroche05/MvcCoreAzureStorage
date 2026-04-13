@@ -23,44 +23,44 @@ namespace MvcCoreAzureStorage.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateContainer(string containerName)
+        public async Task<IActionResult> CreateContainer(string containername)
         {
-            await this._service.CreateContainerAsync(containerName);
+            await this._service.CreateContainerAsync(containername);
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> DeteleContainer(string containerName)
+        public async Task<IActionResult> DeleteContainer(string containername)
         {
-            await this._service.DeleteContainerAsync(containerName);
+            await this._service.DeleteContainerAsync(containername);
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> ListBlobs(string containerName)
+        public async Task<IActionResult> ListBlobs(string containername)
         {
-            List<BlobModel> models = await this._service.GetBlobsAsync(containerName);
+            List<BlobModel> models = await this._service.GetBlobsAsync(containername);
             return View(models);
         }
 
-        public IActionResult UpdateBlob(string containerName)
+        public IActionResult UploadBlob(string containername)
         {
-            ViewData["CONTAINER"] = containerName;
+            ViewData["CONTAINER"] = containername;
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateBlob(string containerName, IFormFile file)
+        public async Task<IActionResult> UploadBlob(string containername, IFormFile file)
         {
-            string blobName = file.FileName;
+            string blobname = file.FileName;
             using (Stream stream = file.OpenReadStream())
             {
-                await this._service.UploadBlobAsync(containerName, blobName, stream);
+                await this._service.UploadBlobAsync(containername, blobname, stream);
             }
-            return RedirectToAction("ListBlobs", new { containerName = containerName });
+            return RedirectToAction("ListBlobs", new { containername = containername });
         }
 
-        public async Task<IActionResult> DeleteBlob(string containerName, string blobName)
+        public async Task<IActionResult> DeleteBlob(string containername, string blobname)
         {
-            await this._service.DeleteBlobAsync(containerName, blobName);
-            return RedirectToAction("ListBlobs", new { containerName = containerName });
+            await this._service.DeleteBlobAsync(containername, blobname);
+            return RedirectToAction("ListBlobs", new { containername = containername });
         }
 
 

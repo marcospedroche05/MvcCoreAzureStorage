@@ -18,6 +18,15 @@
         {
             <li class="list-group-item list-group-item-info">
                 @container
+                <a asp-controller="AzureBlobs" asp-action="DeleteContainer" asp-route-containername="@container" class="btn btn-danger">
+                    Delete container
+                </a>
+                <a asp-controller="AzureBlobs" asp-action="UploadBlob" asp-route-containername="@container" class="btn btn-success">
+                    Upload Blob
+                </a>
+                <a asp-controller="AzureBlobs" asp-action="ListBlobs" asp-route-containerName="@container" class="btn btn-warning">
+                    List Blobs
+                </a>
             </li>
         }
     </ul>
